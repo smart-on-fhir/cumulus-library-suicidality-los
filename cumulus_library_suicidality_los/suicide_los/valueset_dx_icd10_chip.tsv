@@ -4,10 +4,10 @@ attempt	T14.91XA	Suicide attempt, initial encounter
 attempt	T14.91XD	Suicide attempt, subsequent encounter	
 attempt	T14.91XS	Suicide attempt, sequela	
 ideation	R45.851	Suicidal ideations	
-self_harm	R45.88	Nonsuicidal self-harm :changed 2021-10-01	Oct 1, 2021 coding change
-self_harm	Z91.5	Personal history of self harm :changed 2021-10-01	Oct 1, 2021 coding change
-self_harm	Z91.51	Personal history of suicidal behavior :changed 2021-10-01	Oct 1, 2021 coding change
-self_harm	Z91.52	Personal history of nonsuicidal self-harm :changed 2021-10-01	Oct 1, 2021 coding change
+self_harm	R45.88	Nonsuicidal self-harm after 2021-10-01	Oct 1, 2021 coding change
+self_harm	Z91.5	Personal history of self harm after 2021-10-01	Oct 1, 2021 coding change
+self_harm	Z91.51	Personal history of suicidal behavior after 2021-10-01	Oct 1, 2021 coding change
+self_harm	Z91.52	Personal history of nonsuicidal self-harm after 2021-10-01	Oct 1, 2021 coding change
 self_harm	T36.0X2	Poisoning by penicillins, intentional self-harm	
 self_harm	T36.0X2A	Poisoning by penicillins, intentional self-harm, init encntr	
 self_harm	T36.0X2D	Poisoning by penicillins, intentional self-harm, subs encntr	

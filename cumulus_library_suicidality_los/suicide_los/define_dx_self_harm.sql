@@ -1,8 +1,8 @@
 create or replace view suicide_los__define_dx_self_harm as select * from (values
-('http://hl7.org/fhir/sid/icd-10-cm', 'R45.88', 'Nonsuicidal self-harm :changed 2021-10-01')
-,('http://hl7.org/fhir/sid/icd-10-cm', 'Z91.5', 'Personal history of self harm :changed 2021-10-01')
-,('http://hl7.org/fhir/sid/icd-10-cm', 'Z91.51', 'Personal history of suicidal behavior :changed 2021-10-01')
-,('http://hl7.org/fhir/sid/icd-10-cm', 'Z91.52', 'Personal history of nonsuicidal self-harm :changed 2021-10-01')
+('http://hl7.org/fhir/sid/icd-10-cm', 'R45.88', 'Nonsuicidal self-harm after 2021-10-01')
+,('http://hl7.org/fhir/sid/icd-10-cm', 'Z91.5', 'Personal history of self harm after 2021-10-01')
+,('http://hl7.org/fhir/sid/icd-10-cm', 'Z91.51', 'Personal history of suicidal behavior after 2021-10-01')
+,('http://hl7.org/fhir/sid/icd-10-cm', 'Z91.52', 'Personal history of nonsuicidal self-harm after 2021-10-01')
 ,('http://hl7.org/fhir/sid/icd-10-cm', 'T36.0X2', 'Poisoning by penicillins, intentional self-harm')
 ,('http://hl7.org/fhir/sid/icd-10-cm', 'T36.0X2A', 'Poisoning by penicillins, intentional self-harm, init encntr')
 ,('http://hl7.org/fhir/sid/icd-10-cm', 'T36.0X2D', 'Poisoning by penicillins, intentional self-harm, subs encntr')
