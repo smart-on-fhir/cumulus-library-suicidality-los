@@ -2,7 +2,7 @@
 # to clean up queries, so it should be unique. Name your tables in the following
 # format: [study_prefix]__[table_name]. It should probably, but not necessarily,
 # be the same name as the folder the study definition is in.
-study_prefix = "template"
+study_prefix = "suicide_los"
 
 # The following section describes all tables that should be generated directly
 # from SQL files.
@@ -29,8 +29,12 @@ file_names = [
 # The following tables will be output to disk when an export is run. In most cases,
 # only count tables should be output in this way.
 export_list = [
+    "suicide_los__count_dx_week",
     "suicide_los__count_dx_month",
+    "suicide_los__count_study_period_week",
     "suicide_los__count_study_period_month",
+    "suicide_los__count_prevalence_demographics",
+    "suicide_los__count_prevalence_icd10_month",
 ]
 
 
