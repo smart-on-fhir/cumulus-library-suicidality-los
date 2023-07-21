@@ -10,39 +10,50 @@ def table(tablename: str, duration=None) -> str:
     else: 
         return f'{STUDY_PREFIX}__{tablename}'
 
-def count_dx(duration='week'):
+def count_dx(duration=None):
     view_name = table('count_dx', duration)
     from_table = table('dx')
-    cols = [f'cond_{duration}',
-            'category_code',
+    cols = ['category_code',
             'cond_system',
             'cond_display',
             'subtype',
-            'gender',
-            'race_display',
-            'age_at_visit']
-    return counts.count_encounter(view_name, from_table, cols)
-
-def count_study_period(duration='month'):
-    view_name = table('count_study_period', duration)
-    from_table = table('study_period')
-    cols = [f'start_{duration}',
             'period',
             'enc_class_code',
             'gender',
             'age_group',
             'race_display']
-    return counts.count_encounter(view_name, from_table, cols)
 
-def count_prevalence_icd10(duration='month'):
+    if duration:
+        cols.append(f'cond_{duration}')
+
+    return min_subject(counts.count_encounter(view_name, from_table, cols), 1)
+
+def count_study_period(duration=None):
+    view_name = table('count_study_period', duration)
+    from_table = table('study_period')
+    cols = ['period',
+            'enc_class_code',
+            'gender',
+            'age_group',
+            'race_display']
+
+    if duration:
+        cols.append(f'start_{duration}')
+
+    return min_subject(counts.count_encounter(view_name, from_table, cols), 10)
+
+def count_prevalence_icd10(duration=None):
     view_name = table('count_prevalence_icd10', duration)
     from_table = table('prevalence')
-    cols = [f'start_{duration}',
-            'enc_class_code',
+    cols = ['enc_class_code',
             'waiting',
             'subtype',
             'cond_display']
-    return counts.count_encounter(view_name, from_table, cols)
+
+    if duration:
+        cols.append(f'start_{duration}')
+
+    return min_subject(counts.count_encounter(view_name, from_table, cols), 10)
 
 def count_prevalence_demographics():
     view_name = table('count_prevalence_demographics')
@@ -51,10 +62,28 @@ def count_prevalence_demographics():
             'waiting',
             'subtype',
             'gender',
+            'enc_class_code',
             'age_at_visit',
-            'age_group',
             'race_display']
-    return counts.count_encounter(view_name, from_table, cols)
+
+    return min_subject(counts.count_encounter(view_name, from_table, cols), 1)
+
+def count_comorbidity(duration=None):
+    view_name = table('count_comorbidity', duration)
+    from_table = table('comorbidity')
+    cols = ['comorbidity_display',
+            'waiting',
+            'subtype',
+            'gender',
+            'enc_class_code',
+            'age_at_visit',
+            'race_display']
+
+    if duration:
+        cols.append(f'comorbidity_{duration}')
+
+    return min_subject(counts.count_encounter(view_name, from_table, cols), 1)
+
 
 def concat_view_sql(create_view_list: List[str]) -> str:
     """
@@ -69,12 +98,18 @@ def concat_view_sql(create_view_list: List[str]) -> str:
 
     return '\n'.join(concat)
 
+def min_subject(view_sql: str, cnt_subject=10):
+    return view_sql.replace(f'WHERE cnt_subject >= 10', f'WHERE cnt_subject >= {cnt_subject}')
+
 def write_view_sql(view_list_sql: List[str], filename='count.sql') -> None:
     """
     :param view_list_sql: SQL prepared statements
     :param filename: path to output file, default 'count.sql' in PWD
     """
-    sql_optimizer = concat_view_sql(view_list_sql).replace('ORDER BY cnt desc', '')
+    sql_optimizer = concat_view_sql(view_list_sql)
+    sql_optimizer = sql_optimizer.replace("CREATE or replace VIEW", 'CREATE TABLE')
+    sql_optimizer = sql_optimizer.replace("ORDER BY cnt desc", "")
+
     with open(filename, 'w') as fout:
         fout.write(sql_optimizer)
 
@@ -82,10 +117,12 @@ def write_view_sql(view_list_sql: List[str], filename='count.sql') -> None:
 if __name__ == '__main__':
 
     write_view_sql([
-        count_dx('week'),
-        count_dx('month'),
-        count_study_period('week'),
         count_study_period('month'),
+        count_study_period('week'),
+        count_prevalence_icd10('month'),
+        count_prevalence_icd10('week'),
         count_prevalence_demographics(),
-        count_prevalence_icd10('month')
+        count_comorbidity(),
+        count_comorbidity('month'),
+
     ])
