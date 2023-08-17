@@ -1,6 +1,6 @@
 --create table suicide_los__dx as
 --SELECT DISTINCT
---    c.category.code as category_code,
+--    c.code as category_code,
 --    dx.subtype,
 --    dx.code AS cond_code,
 --    dx.display as cond_display,
@@ -17,17 +17,16 @@
 --FROM
 --    suicide_los__define_dx AS dx,
 --    core__condition AS c,
---    core__condition_codable_concepts cc,
 --    suicide_los__study_period S
 --WHERE
---    dx.system = cc.code_system  and
---    dx.code   = cc.code         and
+--    dx.system = c.code_system  and
+--    dx.code   = c.code         and
 --    cc.id = c.condition_id      and
 --    c.encounter_ref = S.encounter_ref
 
 create table suicide_los__dx as
 SELECT DISTINCT
-    c.category.code as category_code,
+    c.code as category_code,
     dx.subtype,
     dx.code AS cond_code,
     dx.display as cond_display,
@@ -38,11 +37,10 @@ SELECT DISTINCT
     c.encounter_ref
 FROM
     suicide_los__define_dx AS dx,
-    core__condition AS c,
-    core__condition_codable_concepts cc
+    core__condition AS c
 WHERE
-    dx.system = cc.code_system  and
-    dx.code   = cc.code         and
-    cc.id = c.condition_id      ;
+    dx.system = c.code_system  and
+    dx.code   = c.code
+;
 
 
