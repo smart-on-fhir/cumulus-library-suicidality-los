@@ -7,11 +7,9 @@ is_waiting as
         waiting.display
     from
         suicide_los__define_waiting as waiting,
-        core__condition_codable_concepts as mapping,
         core__condition as cond
     where
-        mapping.code = waiting.code and
-        mapping.id = cond.condition_id
+        cond.code = waiting.code
 ),
 is_suicidal as
 (
