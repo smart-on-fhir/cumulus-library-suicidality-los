@@ -40,6 +40,7 @@ export_list = [
     "suicide_los__count_study_period_month",
     "suicide_los__count_prevalence_demographics",
     "suicide_los__count_prevalence_icd10_month",
+    "suicide_los__meta_version",    
 ]
 
 
