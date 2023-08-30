@@ -1,132 +1,278 @@
--- ###########################################################
-CREATE TABLE suicide_los__count_study_period_month AS 
-    with powerset as
-    (
-        select
-        count(distinct subject_ref)   as cnt_subject
-        , count(distinct encounter_ref)   as cnt_encounter
-        , period, enc_class_code, gender, age_group, race_display, start_month        
+-- noqa: disable=all
+
+CREATE TABLE suicide_los__count_study_period_month AS (
+    WITH powerset AS (
+        SELECT
+            count(DISTINCT subject_ref) AS cnt_subject,
+            count(DISTINCT encounter_ref) AS cnt_encounter,
+            "period",
+            "enc_class_code",
+            "gender",
+            "age_group",
+            "race_display",
+            "start_month"
         FROM suicide_los__study_period
-        group by CUBE
-        ( period, enc_class_code, gender, age_group, race_display, start_month )
+        GROUP BY
+            cube(
+                "period",
+                "enc_class_code",
+                "gender",
+                "age_group",
+                "race_display",
+                "start_month"
+            )
     )
-    select
-          cnt_encounter  as cnt 
-        , period, enc_class_code, gender, age_group, race_display, start_month
-    from powerset 
-    WHERE cnt_subject >= 10 
-    ;
+
+    SELECT
+        cnt_encounter AS cnt,
+        "period",
+        "enc_class_code",
+        "gender",
+        "age_group",
+        "race_display",
+        "start_month"
+    FROM powerset
+    WHERE
+        cnt_subject >= 10
+        
+);
 
 -- ###########################################################
-CREATE TABLE suicide_los__count_study_period_week AS 
-    with powerset as
-    (
-        select
-        count(distinct subject_ref)   as cnt_subject
-        , count(distinct encounter_ref)   as cnt_encounter
-        , period, enc_class_code, gender, age_group, race_display, start_week        
+
+CREATE TABLE suicide_los__count_study_period_week AS (
+    WITH powerset AS (
+        SELECT
+            count(DISTINCT subject_ref) AS cnt_subject,
+            count(DISTINCT encounter_ref) AS cnt_encounter,
+            "period",
+            "enc_class_code",
+            "gender",
+            "age_group",
+            "race_display",
+            "start_week"
         FROM suicide_los__study_period
-        group by CUBE
-        ( period, enc_class_code, gender, age_group, race_display, start_week )
+        GROUP BY
+            cube(
+                "period",
+                "enc_class_code",
+                "gender",
+                "age_group",
+                "race_display",
+                "start_week"
+            )
     )
-    select
-          cnt_encounter  as cnt 
-        , period, enc_class_code, gender, age_group, race_display, start_week
-    from powerset 
-    WHERE cnt_subject >= 10 
-    ;
+
+    SELECT
+        cnt_encounter AS cnt,
+        "period",
+        "enc_class_code",
+        "gender",
+        "age_group",
+        "race_display",
+        "start_week"
+    FROM powerset
+    WHERE
+        cnt_subject >= 10
+        
+);
 
 -- ###########################################################
-CREATE TABLE suicide_los__count_prevalence_icd10_month AS 
-    with powerset as
-    (
-        select
-        count(distinct subject_ref)   as cnt_subject
-        , count(distinct encounter_ref)   as cnt_encounter
-        , enc_class_code, waiting, subtype, cond_display, start_month        
+
+CREATE TABLE suicide_los__count_prevalence_icd10_month AS (
+    WITH powerset AS (
+        SELECT
+            count(DISTINCT subject_ref) AS cnt_subject,
+            count(DISTINCT encounter_ref) AS cnt_encounter,
+            "enc_class_code",
+            "waiting",
+            "subtype",
+            "cond_display",
+            "start_month"
         FROM suicide_los__prevalence
-        group by CUBE
-        ( enc_class_code, waiting, subtype, cond_display, start_month )
+        GROUP BY
+            cube(
+                "enc_class_code",
+                "waiting",
+                "subtype",
+                "cond_display",
+                "start_month"
+            )
     )
-    select
-          cnt_encounter  as cnt 
-        , enc_class_code, waiting, subtype, cond_display, start_month
-    from powerset 
-    WHERE cnt_subject >= 10 
-    ;
+
+    SELECT
+        cnt_encounter AS cnt,
+        "enc_class_code",
+        "waiting",
+        "subtype",
+        "cond_display",
+        "start_month"
+    FROM powerset
+    WHERE
+        cnt_subject >= 10
+        
+);
 
 -- ###########################################################
-CREATE TABLE suicide_los__count_prevalence_icd10_week AS 
-    with powerset as
-    (
-        select
-        count(distinct subject_ref)   as cnt_subject
-        , count(distinct encounter_ref)   as cnt_encounter
-        , enc_class_code, waiting, subtype, cond_display, start_week        
+
+CREATE TABLE suicide_los__count_prevalence_icd10_week AS (
+    WITH powerset AS (
+        SELECT
+            count(DISTINCT subject_ref) AS cnt_subject,
+            count(DISTINCT encounter_ref) AS cnt_encounter,
+            "enc_class_code",
+            "waiting",
+            "subtype",
+            "cond_display",
+            "start_week"
         FROM suicide_los__prevalence
-        group by CUBE
-        ( enc_class_code, waiting, subtype, cond_display, start_week )
+        GROUP BY
+            cube(
+                "enc_class_code",
+                "waiting",
+                "subtype",
+                "cond_display",
+                "start_week"
+            )
     )
-    select
-          cnt_encounter  as cnt 
-        , enc_class_code, waiting, subtype, cond_display, start_week
-    from powerset 
-    WHERE cnt_subject >= 10 
-    ;
+
+    SELECT
+        cnt_encounter AS cnt,
+        "enc_class_code",
+        "waiting",
+        "subtype",
+        "cond_display",
+        "start_week"
+    FROM powerset
+    WHERE
+        cnt_subject >= 10
+        
+);
 
 -- ###########################################################
-CREATE TABLE suicide_los__count_prevalence_demographics AS 
-    with powerset as
-    (
-        select
-        count(distinct subject_ref)   as cnt_subject
-        , count(distinct encounter_ref)   as cnt_encounter
-        , period, waiting, subtype, gender, enc_class_code, age_at_visit, race_display        
+
+CREATE TABLE suicide_los__count_prevalence_demographics AS (
+    WITH powerset AS (
+        SELECT
+            count(DISTINCT subject_ref) AS cnt_subject,
+            count(DISTINCT encounter_ref) AS cnt_encounter,
+            "period",
+            "waiting",
+            "subtype",
+            "gender",
+            "enc_class_code",
+            "age_at_visit",
+            "race_display"
         FROM suicide_los__prevalence
-        group by CUBE
-        ( period, waiting, subtype, gender, enc_class_code, age_at_visit, race_display )
+        GROUP BY
+            cube(
+                "period",
+                "waiting",
+                "subtype",
+                "gender",
+                "enc_class_code",
+                "age_at_visit",
+                "race_display"
+            )
     )
-    select
-          cnt_encounter  as cnt 
-        , period, waiting, subtype, gender, enc_class_code, age_at_visit, race_display
-    from powerset 
-    WHERE cnt_subject >= 1 
-    ;
+
+    SELECT
+        cnt_encounter AS cnt,
+        "period",
+        "waiting",
+        "subtype",
+        "gender",
+        "enc_class_code",
+        "age_at_visit",
+        "race_display"
+    FROM powerset
+    WHERE
+        cnt_subject >= 1
+        
+);
 
 -- ###########################################################
-CREATE TABLE suicide_los__count_comorbidity AS 
-    with powerset as
-    (
-        select
-        count(distinct subject_ref)   as cnt_subject
-        , count(distinct encounter_ref)   as cnt_encounter
-        , comorbidity_display, waiting, subtype, gender, enc_class_code, age_at_visit, race_display        
+
+CREATE TABLE suicide_los__count_comorbidity AS (
+    WITH powerset AS (
+        SELECT
+            count(DISTINCT subject_ref) AS cnt_subject,
+            count(DISTINCT encounter_ref) AS cnt_encounter,
+            "comorbidity_display",
+            "waiting",
+            "subtype",
+            "gender",
+            "enc_class_code",
+            "age_at_visit",
+            "race_display"
         FROM suicide_los__comorbidity
-        group by CUBE
-        ( comorbidity_display, waiting, subtype, gender, enc_class_code, age_at_visit, race_display )
+        GROUP BY
+            cube(
+                "comorbidity_display",
+                "waiting",
+                "subtype",
+                "gender",
+                "enc_class_code",
+                "age_at_visit",
+                "race_display"
+            )
     )
-    select
-          cnt_encounter  as cnt 
-        , comorbidity_display, waiting, subtype, gender, enc_class_code, age_at_visit, race_display
-    from powerset 
-    WHERE cnt_subject >= 1 
-    ;
+
+    SELECT
+        cnt_encounter AS cnt,
+        "comorbidity_display",
+        "waiting",
+        "subtype",
+        "gender",
+        "enc_class_code",
+        "age_at_visit",
+        "race_display"
+    FROM powerset
+    WHERE
+        cnt_subject >= 1
+        
+);
 
 -- ###########################################################
-CREATE TABLE suicide_los__count_comorbidity_month AS 
-    with powerset as
-    (
-        select
-        count(distinct subject_ref)   as cnt_subject
-        , count(distinct encounter_ref)   as cnt_encounter
-        , comorbidity_display, waiting, subtype, gender, enc_class_code, age_at_visit, race_display, comorbidity_month        
+
+CREATE TABLE suicide_los__count_comorbidity_month AS (
+    WITH powerset AS (
+        SELECT
+            count(DISTINCT subject_ref) AS cnt_subject,
+            count(DISTINCT encounter_ref) AS cnt_encounter,
+            "comorbidity_display",
+            "waiting",
+            "subtype",
+            "gender",
+            "enc_class_code",
+            "age_at_visit",
+            "race_display",
+            "comorbidity_month"
         FROM suicide_los__comorbidity
-        group by CUBE
-        ( comorbidity_display, waiting, subtype, gender, enc_class_code, age_at_visit, race_display, comorbidity_month )
+        GROUP BY
+            cube(
+                "comorbidity_display",
+                "waiting",
+                "subtype",
+                "gender",
+                "enc_class_code",
+                "age_at_visit",
+                "race_display",
+                "comorbidity_month"
+            )
     )
-    select
-          cnt_encounter  as cnt 
-        , comorbidity_display, waiting, subtype, gender, enc_class_code, age_at_visit, race_display, comorbidity_month
-    from powerset 
-    WHERE cnt_subject >= 1 
-    ;
+
+    SELECT
+        cnt_encounter AS cnt,
+        "comorbidity_display",
+        "waiting",
+        "subtype",
+        "gender",
+        "enc_class_code",
+        "age_at_visit",
+        "race_display",
+        "comorbidity_month"
+    FROM powerset
+    WHERE
+        cnt_subject >= 1
+        
+);

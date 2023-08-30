@@ -24,8 +24,12 @@ file_names = [
     "table_dx.sql",
     "table_prevalence.sql",
     "table_comorbidity.sql",
-    "count.sql",
     "version.sql"
+]
+
+[counts_builder_config]
+file_names = [
+    "count.py"
 ]
 
 # The following section defines parameters related to exporting study data from
