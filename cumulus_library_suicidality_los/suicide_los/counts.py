@@ -24,7 +24,7 @@ class SuicideLOSCountsBuilder(CountsBuilder):
             cols.append(f"cond_{duration}")
 
         return self.count_encounter(
-            view_name, from_table, cols, where_clauses=[self.min_subject(1)]
+            view_name, from_table, cols
         )
 
     def count_study_period(self, duration=None):
@@ -36,7 +36,7 @@ class SuicideLOSCountsBuilder(CountsBuilder):
             cols.append(f"start_{duration}")
 
         return self.count_encounter(
-            view_name, from_table, cols, where_clauses=[self.min_subject(10)]
+            view_name, from_table, cols
         )
 
     def count_prevalence_icd10(self, duration=None):
@@ -48,7 +48,7 @@ class SuicideLOSCountsBuilder(CountsBuilder):
             cols.append(f"start_{duration}")
 
         return self.count_encounter(
-            view_name, from_table, cols, where_clauses=[self.min_subject(10)]
+            view_name, from_table, cols
         )
 
     def count_prevalence_demographics(self):
@@ -65,7 +65,7 @@ class SuicideLOSCountsBuilder(CountsBuilder):
         ]
 
         return self.count_encounter(
-            view_name, from_table, cols, where_clauses=[self.min_subject(1)]
+            view_name, from_table, cols
         )
 
     def count_comorbidity(self, duration=None):
@@ -85,11 +85,8 @@ class SuicideLOSCountsBuilder(CountsBuilder):
             cols.append(f"comorbidity_{duration}")
 
         return self.count_encounter(
-            view_name, from_table, cols, where_clauses=[self.min_subject(1)]
+            view_name, from_table, cols
         )
-
-    def min_subject(self, cnt_subject=10):
-        return f"cnt_subject >= {cnt_subject}"
 
     def prepare_queries(self, cursor=None, schema=None):
         self.queries = [
@@ -105,4 +102,4 @@ class SuicideLOSCountsBuilder(CountsBuilder):
 
 if __name__ == "__main__":
     builder = SuicideLOSCountsBuilder()
-    builder.write_counts(f"{Path(__file__).resolve().parent}/count.sql")
+    builder.write_counts(f"{Path(__file__).resolve().parent}/counts.sql")

@@ -32,9 +32,8 @@ CREATE TABLE suicide_los__count_study_period_month AS (
         "race_display",
         "start_month"
     FROM powerset
-    WHERE
+    WHERE 
         cnt_subject >= 10
-        
 );
 
 -- ###########################################################
@@ -71,9 +70,8 @@ CREATE TABLE suicide_los__count_study_period_week AS (
         "race_display",
         "start_week"
     FROM powerset
-    WHERE
+    WHERE 
         cnt_subject >= 10
-        
 );
 
 -- ###########################################################
@@ -107,9 +105,8 @@ CREATE TABLE suicide_los__count_prevalence_icd10_month AS (
         "cond_display",
         "start_month"
     FROM powerset
-    WHERE
+    WHERE 
         cnt_subject >= 10
-        
 );
 
 -- ###########################################################
@@ -143,9 +140,8 @@ CREATE TABLE suicide_los__count_prevalence_icd10_week AS (
         "cond_display",
         "start_week"
     FROM powerset
-    WHERE
+    WHERE 
         cnt_subject >= 10
-        
 );
 
 -- ###########################################################
@@ -185,9 +181,8 @@ CREATE TABLE suicide_los__count_prevalence_demographics AS (
         "age_at_visit",
         "race_display"
     FROM powerset
-    WHERE
-        cnt_subject >= 1
-        
+    WHERE 
+        cnt_subject >= 10
 );
 
 -- ###########################################################
@@ -227,9 +222,8 @@ CREATE TABLE suicide_los__count_comorbidity AS (
         "age_at_visit",
         "race_display"
     FROM powerset
-    WHERE
-        cnt_subject >= 1
-        
+    WHERE 
+        cnt_subject >= 10
 );
 
 -- ###########################################################
@@ -272,7 +266,6 @@ CREATE TABLE suicide_los__count_comorbidity_month AS (
         "race_display",
         "comorbidity_month"
     FROM powerset
-    WHERE
-        cnt_subject >= 1
-        
+    WHERE 
+        cnt_subject >= 10
 );
