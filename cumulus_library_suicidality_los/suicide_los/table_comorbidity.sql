@@ -23,7 +23,7 @@ select distinct
         suicide_los__dx.cond_code,
         suicide_los__dx.cond_display,
         condition_row.*,
-        prevalence.enc_class_code,
+        prevalence.enc_class_display,
         prevalence.waiting,
         prevalence.period,
         prevalence.age_at_visit,
