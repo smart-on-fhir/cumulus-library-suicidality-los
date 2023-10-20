@@ -34,13 +34,16 @@ SELECT DISTINCT
     c.recorded_month AS cond_month,
     c.recorded_week AS cond_week,
     c.subject_ref,
-    c.encounter_ref
+    c.encounter_ref,
+    e.status
 FROM
     suicide_los__define_dx AS dx,
+    core__encounter AS e,
     core__condition AS c
 WHERE
     dx.system = c.code_system  and
-    dx.code   = c.code
+    dx.code   = c.code and
+    c.encounter_ref = e.encounter_ref
 ;
 
 

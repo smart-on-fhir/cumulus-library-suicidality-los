@@ -20,7 +20,8 @@ is_suicidal as
         cond_display,
         cond_system,
         subject_ref,
-        encounter_ref
+        encounter_ref,
+        status
     from suicide_los__dx
 ),
 study_period AS (
@@ -34,7 +35,8 @@ study_period AS (
         age_at_visit,
         age_group,
         subject_ref,
-        encounter_ref
+        encounter_ref,
+        status
     FROM suicide_los__study_period
     WHERE ed_note
 )
@@ -52,7 +54,8 @@ select
     study_period.age_at_visit, 
     study_period.age_group,
     study_period.subject_ref, 
-    study_period.encounter_ref
+    study_period.encounter_ref,
+    study_period.status
 from study_period
 left join   is_waiting  on  study_period.encounter_ref = is_waiting.encounter_ref
 left join   is_suicidal on  study_period.encounter_ref = is_suicidal.encounter_ref
