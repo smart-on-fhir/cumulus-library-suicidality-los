@@ -26,7 +26,7 @@ is_suicidal as
 study_period AS (
     SELECT DISTINCT
         period,
-        enc_class_code,
+        enc_class_display,
         start_week,
         start_month,
         gender,
@@ -43,7 +43,7 @@ select
     coalesce(is_suicidal.cond_code, 'None') as cond_code,
     coalesce(is_suicidal.cond_display, 'None') as cond_display,
     coalesce(is_waiting.display, 'None') as waiting,
-    study_period.enc_class_code,
+    study_period.enc_class_display,
     study_period.period,
     study_period.start_week,
     study_period.start_month, 

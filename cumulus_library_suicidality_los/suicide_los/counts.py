@@ -14,7 +14,7 @@ class SuicideLOSCountsBuilder(CountsBuilder):
             "cond_display",
             "subtype",
             "period",
-            "enc_class_code",
+            "enc_class_display",
             "gender",
             "age_group",
             "race_display",
@@ -30,7 +30,7 @@ class SuicideLOSCountsBuilder(CountsBuilder):
     def count_study_period(self, duration=None):
         view_name = self.get_table_name("count_study_period", duration)
         from_table = self.get_table_name("study_period")
-        cols = ["period", "enc_class_code", "gender", "age_group", "race_display"]
+        cols = ["period", "enc_class_display", "gender", "age_group", "race_display"]
 
         if duration:
             cols.append(f"start_{duration}")
@@ -42,7 +42,7 @@ class SuicideLOSCountsBuilder(CountsBuilder):
     def count_prevalence_icd10(self, duration=None):
         view_name = self.get_table_name("count_prevalence_icd10", duration)
         from_table = self.get_table_name("prevalence")
-        cols = ["enc_class_code", "waiting", "subtype", "cond_display"]
+        cols = ["enc_class_display", "waiting", "subtype", "cond_display"]
 
         if duration:
             cols.append(f"start_{duration}")
@@ -59,7 +59,7 @@ class SuicideLOSCountsBuilder(CountsBuilder):
             "waiting",
             "subtype",
             "gender",
-            "enc_class_code",
+            "enc_class_display",
             "age_at_visit",
             "race_display",
         ]
@@ -76,7 +76,7 @@ class SuicideLOSCountsBuilder(CountsBuilder):
             "waiting",
             "subtype",
             "gender",
-            "enc_class_code",
+            "enc_class_display",
             "age_at_visit",
             "race_display",
         ]
