@@ -12,7 +12,7 @@ For more information, [browse the Cumulus library documentation](https://docs.sm
 
 To install the module, simply run `pip install cumulus-library-suicidality-los`.
 
-This will add a `covid_library_los` study target to `cumulus-library`.
+This will add a `suicide_los` study target to `cumulus-library`.
 
 ## Publication
 

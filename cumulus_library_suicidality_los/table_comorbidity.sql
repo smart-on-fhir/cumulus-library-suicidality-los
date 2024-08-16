@@ -8,8 +8,8 @@ WITH condition_row AS
         c.code AS comorbidity_code,
         c.code_display as comorbidity_display,
         fhirspec.code_system as comorbidity_system_display,
-        c.recorded_month AS comorbidity_month,
-        c.recorded_week AS comorbidity_week,
+        c.recordeddate_month AS comorbidity_month,
+        c.recordeddate_week AS comorbidity_week,
         c.recordeddate as comorbidity_date,
         e.status
     FROM
@@ -18,7 +18,7 @@ WITH condition_row AS
         core__encounter AS e
     WHERE
         c.encounter_ref = e.encounter_ref and
-        c.code_system = fhirspec.uri   and
+        c.system = fhirspec.uri   and
         c.code not in (select distinct code from suicide_los__define_dx)
 )
 select distinct

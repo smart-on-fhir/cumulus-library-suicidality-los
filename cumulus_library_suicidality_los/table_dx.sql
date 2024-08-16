@@ -5,8 +5,8 @@
 --    dx.code AS cond_code,
 --    dx.display as cond_display,
 --    dx.system as cond_system,
---    c.recorded_month AS cond_month,
---    c.recorded_week AS cond_week,
+--    c.recordeddate_month AS cond_month,
+--    c.recordeddate_week AS cond_week,
 --    S.age_at_visit,
 --    S.age_group,
 --    S.gender,
@@ -31,8 +31,8 @@ SELECT DISTINCT
     dx.code AS cond_code,
     dx.display as cond_display,
     dx.system as cond_system,
-    c.recorded_month AS cond_month,
-    c.recorded_week AS cond_week,
+    c.recordeddate_month AS cond_month,
+    c.recordeddate_week AS cond_week,
     c.subject_ref,
     c.encounter_ref,
     e.status
@@ -41,7 +41,7 @@ FROM
     core__encounter AS e,
     core__condition AS c
 WHERE
-    dx.system = c.code_system  and
+    dx.system = c.system  and
     dx.code   = c.code and
     c.encounter_ref = e.encounter_ref
 ;

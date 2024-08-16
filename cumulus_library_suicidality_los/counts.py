@@ -1,8 +1,9 @@
-from pathlib import Path
-from cumulus_library.schema.counts import CountsBuilder
+import pathlib
+
+import cumulus_library
 
 
-class SuicideLOSCountsBuilder(CountsBuilder):
+class SuicideLOSCountsBuilder(cumulus_library.CountsBuilder):
     display_text = "Creating suicide LOS counts..."
 
     def count_dx(self, duration=None):
@@ -33,7 +34,7 @@ class SuicideLOSCountsBuilder(CountsBuilder):
         cols = ["period", "enc_class_display", "gender", "age_group", "race_display"]
 
         if duration:
-            cols.append(f"start_{duration}")
+            cols.append(f"period_start_{duration}")
 
         return self.count_encounter(
             view_name, from_table, cols
@@ -45,7 +46,7 @@ class SuicideLOSCountsBuilder(CountsBuilder):
         cols = ["enc_class_display", "waiting", "subtype", "cond_display"]
 
         if duration:
-            cols.append(f"start_{duration}")
+            cols.append(f"period_start_{duration}")
 
         return self.count_encounter(
             view_name, from_table, cols
@@ -88,7 +89,7 @@ class SuicideLOSCountsBuilder(CountsBuilder):
             view_name, from_table, cols
         )
 
-    def prepare_queries(self, cursor=None, schema=None):
+    def prepare_queries(self, *args,**kwargs):
         self.queries = [
             self.count_study_period("month"),
             self.count_study_period("week"),
@@ -102,4 +103,4 @@ class SuicideLOSCountsBuilder(CountsBuilder):
 
 if __name__ == "__main__":
     builder = SuicideLOSCountsBuilder()
-    builder.write_counts(f"{Path(__file__).resolve().parent}/counts.sql")
+    builder.write_counts(f"{pathlib.Path(__file__).resolve().parent}/counts.sql")
