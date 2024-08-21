@@ -1,8 +1,9 @@
-from pathlib import Path
-from cumulus_library.statistics.counts import CountsBuilder
+import pathlib
+
+import cumulus_library
 
 
-class SuicideLOSCountsBuilder(CountsBuilder):
+class SuicideLOSCountsBuilder(cumulus_library.CountsBuilder):
     display_text = "Creating suicide LOS counts..."
 
     def count_dx(self, duration=None):
@@ -102,4 +103,4 @@ class SuicideLOSCountsBuilder(CountsBuilder):
 
 if __name__ == "__main__":
     builder = SuicideLOSCountsBuilder()
-    builder.write_counts(f"{Path(__file__).resolve().parent}/counts.sql")
+    builder.write_counts(f"{pathlib.Path(__file__).resolve().parent}/counts.sql")
