@@ -18,7 +18,7 @@ WITH condition_row AS
         core__encounter AS e
     WHERE
         c.encounter_ref = e.encounter_ref and
-        c.system = fhirspec.uri   and
+        c.code_system = fhirspec.uri   and
         c.code not in (select distinct code from suicide_los__define_dx)
 )
 select distinct
