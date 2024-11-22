@@ -41,7 +41,7 @@ FROM
     core__encounter AS e,
     core__condition AS c
 WHERE
-    dx.system = c.system  and
+    dx.system = c.code_system  and
     dx.code   = c.code and
     c.encounter_ref = e.encounter_ref
 ;

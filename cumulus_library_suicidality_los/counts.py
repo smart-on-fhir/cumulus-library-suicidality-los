@@ -6,6 +6,10 @@ import cumulus_library
 class SuicideLOSCountsBuilder(cumulus_library.CountsBuilder):
     display_text = "Creating suicide LOS counts..."
 
+    def __init__(self, study_prefix: str | None = None):
+        super().__init__()
+        self.study_prefix = "suicide_los"
+
     def count_dx(self, duration=None):
         view_name = self.get_table_name("count_dx", duration)
         from_table = self.get_table_name("dx")
